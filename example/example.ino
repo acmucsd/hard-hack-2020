@@ -34,18 +34,21 @@ void loop() {
   //Handle error
   if (Firebase.failed()) {
     Serial.println(Firebase.error());
+    return;
   }
   
   Serial.print("test: ");
   Serial.println(Firebase.getFloat("test"));
   if (Firebase.failed()) {
     Serial.println(Firebase.error());
+    return;
   }
   delay(1000);
   
   Firebase.setFloat("test", 6.28);
   if (Firebase.failed()) {
     Serial.println(Firebase.error());
+    return;
   }
   
   Serial.print("test: ");
@@ -53,6 +56,7 @@ void loop() {
   
   if (Firebase.failed()) {
     Serial.println(Firebase.error());
+    return;
   }
   
   delay(1000);
@@ -61,6 +65,7 @@ void loop() {
   Firebase.setString("nested/test", "hello");
   if (Firebase.failed()) {
     Serial.println(Firebase.error());
+    return;
   }
   
   delay(1000);
@@ -68,6 +73,7 @@ void loop() {
   Firebase.setString("nested/test", "world");
   if (Firebase.failed()) {
     Serial.println(Firebase.error());
+    return;
   }
   
   delay(1000);

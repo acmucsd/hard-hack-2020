@@ -29,14 +29,47 @@ void setup() {
 }
 
 void loop() {
-  //Get the value of "test" field
+  //Will repeatedly change the value of "test" field from 3.14 to 6.28 and back
+  Firebase.setFloat("test", 3.14);
+  //Handle error
+  if (Firebase.failed()) {
+    Serial.println(Firebase.error());
+  }
+  
   Serial.print("test: ");
   Serial.println(Firebase.getFloat("test"));
-
-  //Check for errors
   if (Firebase.failed()) {
-    Serial.println("Error reading from database");
     Serial.println(Firebase.error());
-    return;
   }
+  delay(1000);
+  
+  Firebase.setFloat("test", 6.28);
+  if (Firebase.failed()) {
+    Serial.println(Firebase.error());
+  }
+  
+  Serial.print("test: ");
+  Serial.println(Firebase.getFloat("test"));
+  
+  if (Firebase.failed()) {
+    Serial.println(Firebase.error());
+  }
+  
+  delay(1000);
+
+  //Test changing nested key-value pairs
+  Firebase.setString("nested/test", "hello");
+  if (Firebase.failed()) {
+    Serial.println(Firebase.error());
+  }
+  
+  delay(1000);
+  
+  Firebase.setString("nested/test", "world");
+  if (Firebase.failed()) {
+    Serial.println(Firebase.error());
+  }
+  
+  delay(1000);
+  
 }

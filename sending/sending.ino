@@ -1,11 +1,11 @@
 #include <ESP8266WiFi.h>
 #include <FirebaseArduino.h>
 
-#define FIREBASE_HOST "fir-esp-41099.firebaseio.com"
-#define FIREBASE_AUTH "xbbCax7dKSjH7WwBFNiU7JtWz7rR8r66XlPbYcsf"
+#define FIREBASE_HOST "example.firebaseio.com"
+#define FIREBASE_AUTH "insert-auth-here"
 
-#define WIFI_SSID "NoFreeHotspot4U"
-#define WIFI_PASSWORD "ONE WORD ALL LOWERCASE"
+#define WIFI_SSID "example-ssid"
+#define WIFI_PASSWORD "hunter2"
 
 void setup() {
   //Begin serial output
@@ -26,6 +26,9 @@ void setup() {
 
   //start firebase client
   Firebase.begin(FIREBASE_HOST, FIREBASE_AUTH);
+  Firebase.setFloat("test", 3.14);
+  
+  Firebase.pushFloat("test",6.28);
 }
 
 void loop() {
@@ -35,6 +38,7 @@ void loop() {
   Firebase.setFloat("test", 6.28);
   delay(1000);
 
+  //Test changing nested key-value pairs
   Firebase.set("nested/test", "hello");
   delay(1000);
   Firebase.set("nested/test", "world");
